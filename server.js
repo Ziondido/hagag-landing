@@ -57,9 +57,43 @@ function extractFile(buf, boundary) {
   return null;
 }
 
+const STATIC_DIR = __dirname;
+const MIME = {
+  ".html": "text/html; charset=utf-8",
+  ".css": "text/css; charset=utf-8",
+  ".js": "application/javascript; charset=utf-8",
+  ".json": "application/json; charset=utf-8",
+  ".svg": "image/svg+xml",
+  ".ico": "image/x-icon",
+  ".png": "image/png",
+  ".webm": "video/webm",
+  ".mp4": "video/mp4"
+};
+
+function serveStatic(req, res) {
+  let rel = decodeURIComponent(req.url.split("?")[0]);
+  if (rel === "/" || rel === "") rel = "/index.html";
+  // block path traversal and never expose server/uploads
+  const safe = path.normalize(rel).replace(/^(\.\.[/\\])+/, "");
+  if (safe.includes("..") || safe.startsWith("/uploads") || safe === "/server.js") {
+    res.writeHead(404); return res.end("not found");
+  }
+  const file = path.join(STATIC_DIR, safe);
+  fs.readFile(file, (err, data) => {
+    if (err) { res.writeHead(404); return res.end("not found"); }
+    res.writeHead(200, { "Content-Type": MIME[path.extname(file)] || "application/octet-stream" });
+    res.end(data);
+  });
+}
+
 const server = http.createServer(async (req, res) => {
   cors(res);
   if (req.method === "OPTIONS") { res.writeHead(204); return res.end(); }
+
+  // serve the site itself for GET requests
+  if (req.method === "GET" && !req.url.startsWith("/api/")) {
+    return serveStatic(req, res);
+  }
 
   if (req.method === "POST" && req.url === "/api/reviews") {
     try {

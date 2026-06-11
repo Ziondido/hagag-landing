@@ -9,5 +9,5 @@
 // כשמריצים את server.js המצורף, השתמש ב:
 //   window.HAGAG_CONFIG = { UPLOAD_ENDPOINT: "http://localhost:3000" };
 window.HAGAG_CONFIG = {
-  UPLOAD_ENDPOINT: ""
+  UPLOAD_ENDPOINT: "https://hagag-landing-production.up.railway.app"
 };

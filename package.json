@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "דף נחיתה לקבוצת חגג — ביקורות והמלצות וידאו בהסכמה",
   "scripts": {
+    "start": "node server.js",
     "server": "node server.js",
     "dev": "node server.js"
   },
