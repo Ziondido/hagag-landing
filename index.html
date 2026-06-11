@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="קבוצת חגג — דף נחיתה רשמי. השאירו ביקורת והקליטו המלצת וידאו." />
+  <title>קבוצת חגג · Hagag Group</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <!-- aurora background -->
+  <div class="aurora" aria-hidden="true">
+    <span class="blob b1"></span>
+    <span class="blob b2"></span>
+    <span class="blob b3"></span>
+  </div>
+
+  <header class="nav">
+    <a class="brand" href="#top">
+      <span class="brand-mark">ח</span>
+      <span class="brand-text">קבוצת <strong>חגג</strong></span>
+    </a>
+    <nav class="nav-links">
+      <a href="#about">אודות</a>
+      <a href="#reviews">ביקורות</a>
+      <a href="#video">המלצת וידאו</a>
+    </nav>
+    <a class="btn btn-ghost nav-cta" href="#reviews">השאירו ביקורת</a>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="eyebrow">✦ הקהילה שלנו מדברת</p>
+        <h1 class="hero-title">
+          חוויות אמיתיות.<br />
+          <span class="grad">אנשים אמיתיים.</span>
+        </h1>
+        <p class="hero-sub">
+          ברוכים הבאים לדף הקהילה של <strong>קבוצת חגג</strong>.
+          ספרו לנו על החוויה שלכם — בכתב או בהקלטת וידאו — ועזרו לאחרים להכיר אותנו.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#reviews">✍️ כתבו ביקורת</a>
+          <a class="btn btn-outline" href="#video">🎥 הקליטו המלצה</a>
+        </div>
+        <div class="stats">
+          <div class="stat"><b id="statCount">0</b><span>ביקורות</span></div>
+          <div class="stat"><b id="statAvg">—</b><span>דירוג ממוצע</span></div>
+          <div class="stat"><b>100%</b><span>בהסכמה מלאה</span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="section">
+      <div class="cards">
+        <article class="glass card">
+          <div class="ico">🏆</div>
+          <h3>מצוינות</h3>
+          <p>שנים של ניסיון, שירות אישי, ומחויבות אמיתית לכל לקוח ולקוחה.</p>
+        </article>
+        <article class="glass card">
+          <div class="ico">🤝</div>
+          <h3>אמון</h3>
+          <p>שקיפות מלאה בכל שלב. מה שאתם רואים זה מה שאתם מקבלים.</p>
+        </article>
+        <article class="glass card">
+          <div class="ico">💬</div>
+          <h3>הקשבה</h3>
+          <p>הביקורות שלכם מעצבות אותנו. כל משוב נקרא ומשפיע.</p>
+        </article>
+      </div>
+    </section>
+
+    <!-- REVIEWS -->
+    <section id="reviews" class="section">
+      <div class="section-head">
+        <h2>השאירו ביקורת</h2>
+        <p class="muted">הדירוג שלכם עוזר לקהילה. לוקח 30 שניות.</p>
+      </div>
+
+      <form id="reviewForm" class="glass form" autocomplete="off">
+        <div class="row">
+          <label class="field">
+            <span>שם</span>
+            <input type="text" id="name" name="name" placeholder="איך קוראים לך?" maxlength="40" required />
+          </label>
+          <label class="field">
+            <span>דירוג</span>
+            <div class="stars" id="starInput" role="radiogroup" aria-label="דירוג בכוכבים">
+              <button type="button" class="star" data-v="1" aria-label="1 כוכב">★</button>
+              <button type="button" class="star" data-v="2" aria-label="2 כוכבים">★</button>
+              <button type="button" class="star" data-v="3" aria-label="3 כוכבים">★</button>
+              <button type="button" class="star" data-v="4" aria-label="4 כוכבים">★</button>
+              <button type="button" class="star" data-v="5" aria-label="5 כוכבים">★</button>
+            </div>
+            <input type="hidden" id="rating" name="rating" value="0" required />
+          </label>
+        </div>
+        <label class="field">
+          <span>הביקורת שלך</span>
+          <textarea id="text" name="text" rows="3" placeholder="מה היה לך לומר?" maxlength="500" required></textarea>
+        </label>
+        <button type="submit" class="btn btn-primary">פרסמו ביקורת</button>
+      </form>
+
+      <div id="reviewList" class="review-list"></div>
+    </section>
+
+    <!-- VIDEO TESTIMONIAL (consent-based) -->
+    <section id="video" class="section">
+      <div class="section-head">
+        <h2>הקליטו המלצת וידאו 🎥</h2>
+        <p class="muted">בהסכמה מלאה — אתם רואים את עצמכם, אתם לוחצים הקלטה, אתם מאשרים שליחה.</p>
+      </div>
+
+      <div class="glass recorder">
+        <!-- consent gate: nothing happens until user clicks -->
+        <div class="consent" id="consentBox">
+          <div class="ico big">🔒</div>
+          <h3>הסכמה לפני הפעלת המצלמה</h3>
+          <p class="muted">
+            בלחיצה על הכפתור הדפדפן יבקש הרשאה למצלמה ולמיקרופון.
+            תראו תצוגה מקדימה חיה, ההקלטה מתחילה רק בלחיצה שלכם, ושום דבר לא נשלח עד שתאשרו.
+          </p>
+          <label class="consent-check">
+            <input type="checkbox" id="consentChk" />
+            <span>אני מסכים/ה להפעלת המצלמה ולשליחת הסרטון לקבוצת חגג</span>
+          </label>
+          <button id="enableCam" class="btn btn-primary" disabled>אפשר מצלמה</button>
+        </div>
+
+        <!-- live preview + controls (hidden until consent) -->
+        <div class="stage hidden" id="stage">
+          <div class="video-wrap">
+            <video id="preview" playsinline muted autoplay></video>
+            <span class="rec-dot hidden" id="recDot">● מקליט</span>
+            <span class="rec-time hidden" id="recTime">00:00</span>
+          </div>
+          <div class="controls">
+            <button id="startBtn" class="btn btn-primary">● התחל הקלטה</button>
+            <button id="stopBtn" class="btn btn-outline hidden">■ עצור</button>
+            <button id="retakeBtn" class="btn btn-ghost hidden">↺ הקלטה מחדש</button>
+            <button id="sendBtn" class="btn btn-primary hidden">⤴ שלח לקבוצת חגג</button>
+            <button id="downloadBtn" class="btn btn-ghost hidden">⬇ הורד עותק</button>
+          </div>
+          <p class="status muted" id="vidStatus"></p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <p>© <span id="year"></span> קבוצת חגג · נבנה באהבה. ביקורות והקלטות נאספות <strong>בהסכמה בלבד</strong>.</p>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

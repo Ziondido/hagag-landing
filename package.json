@@ -1,0 +1,10 @@
+{
+  "name": "hagag-landing",
+  "version": "1.0.0",
+  "description": "דף נחיתה לקבוצת חגג — ביקורות והמלצות וידאו בהסכמה",
+  "scripts": {
+    "server": "node server.js",
+    "dev": "node server.js"
+  },
+  "license": "MIT"
+}
